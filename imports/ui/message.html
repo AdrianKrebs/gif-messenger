@@ -1,0 +1,11 @@
+<template name="message">
+    <div class="message-wrapper {{#if isSelf owner}}user{{else}}bot{{/if}}">
+      <div class="text-wrapper">
+          {{{ text }}}<br>
+          <div class="metadata">
+          <img class="tenor" src="/TENOR_VECTOR.svg">
+          <span class="time">{{ formatDate createdAt }}</span>
+          </div>
+          </div>
+    </div>
+</template>

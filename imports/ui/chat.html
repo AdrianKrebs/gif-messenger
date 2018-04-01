@@ -1,0 +1,99 @@
+<template name="chat">
+    <div class="chat-container">
+        <aside class="sidebar">
+            <div class="chat-list">
+                <div class="input-group-search">
+                    <input type="text" class="form-control-search" id="search-input"
+                           placeholder="Search for a user..." autofocus/>
+                    <span class="input-group-btn">
+            <button class="btn btn-info search-chat-user">
+             <i class="fa fa-search"></i>
+            </button>
+                </span>
+                </div>
+                {{#if noResultsFound}}
+                <p class="alert alert-info">No users found</p>
+                {{/if}}
+                {{#each searchResults}}
+                <div class="user-item" data-user-id="{{_id }}">
+                    <img src="{{services.twitter.profile_image_url}}" data-user-id="{{_id }}">
+                    {{profile.name}}
+                </div>
+                {{/each}}
+                {{#each chats}}
+                {{#if isSelf counterpart.userId}}
+                <a class="chat-list-entry {{#if chatIsSelected owner.userId}}selected{{/if}}" data-id="{{_id}}">
+                    <div class="user-list">
+                        <div class="user-item" data-user-id="{{ owner.userId }}">
+                            <img src="{{owner.imgUrl}}" data-user-id="{{owner.userId }}">
+                            {{owner.name}}
+                        </div>
+                    </div>
+                </a>
+                {{else}}
+                <a class="chat-list-entry {{#if chatIsSelected counterpart.userId}}selected{{/if}}" data-id="{{_id}}">
+                    <div class="user-list">
+                        <div class="user-item" data-user-id="{{ counterpart.userId }}">
+                            <img src="{{counterpart.imgUrl}}" data-user-id="{{counterpart.userId }}">
+                            {{counterpart.name}}
+                        </div>
+                    </div>
+                </a>
+                {{/if}}
+                {{/each}}
+                <div class="menu-item">
+                    <button class="logout-btn">Logout</button>
+                </div>
+            </div>
+        </aside>
+
+        <div class="chat-window">
+
+            <div class="message-container" id="messages">
+                {{#each messages}}
+                {{> message}}
+                {{else}}
+                {{#if isUserNew}}
+                <p class="alert alert-warning">Search for a user and start a chat or select a previous conversation.</p>
+                {{else}}
+                <p class="alert alert-warning">You haven't said anything yet. Say hello!</p>
+                {{/if}}
+                {{/each}}
+                <p class="typing"><span>.</span><span>.</span><span>.</span></p>
+            </div>
+
+            <div class="option_button">
+                {{#if isInConversation}}
+                <div class="gif-collection">
+                    <div class="multiple-items gif-content">
+                    </div>
+                </div>
+
+                <form class="new-message-form">
+                    <div class="new-message">
+                        <input type="text" name="text" class="search-input" autocomplete="off"
+                               placeholder="Search a GIF via Tenor..."
+                               id="messageBox"/>
+                    </div>
+                </form>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</template>
+<template name="gif">
+    <img class="gif img-send" src="{{ imageUrl }}"/>
+</template>
+
+
+<template name="sidebar">
+
+</template>
+
+
+<template name="foundUsers">
+    <div class="user" data-user-id="{{_id }}">
+        <img src="{{services.twitter.profile_image_url}}">
+        {{profile.name}}
+    </div>
+</template>

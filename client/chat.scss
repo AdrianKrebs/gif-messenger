@@ -1,0 +1,355 @@
+@import 'variables.scss';
+@import '../node_modules/slick-carousel/slick/slick-theme';
+@import '../node_modules/slick-carousel/slick/slick';
+
+
+
+.message-container {
+  padding: 10vh 0.8rem 8rem 0.8rem;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  max-height: 100%;
+}
+
+.chat-container {
+  width: 100%;
+
+
+  display: flex;
+  flex-direction: row;
+
+
+  .alert-warning {
+    margin: 3em;
+  }
+  .alert-info {
+    margin-bottom: 1em;
+    margin-top: 1em;
+  }
+
+  .chat-window {
+    height: calc(100vh - 4rem);
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 4rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .option_button {
+    max-height: 300px;
+  }
+
+  p {
+    color: #000;
+    margin: 0;
+    padding: 10px;
+    word-break: break-word;
+  }
+
+  @media screen and (max-width: 480px) {
+    p {
+      font-size: 18px;
+      line-height: 22px;
+    }
+  }
+
+  a.button {
+    background: #f5f1ee;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    padding: 15px;
+    text-decoration: none;
+    border: 1px rgba(0, 0, 0, .2) solid;
+    border-top: none;
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: 0px 2px 1px white inset, 0px -2px 20px white, 0px 2px 5px rgba(0, 0, 0, 0.1), 0px 8px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    &:active {
+      box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5) inset, 0px -2px 20px white, 0px 1px 5px rgba(0, 0, 0, 0.1), 0px 2px 10px rgba(0, 0, 0, 0.1);
+      background: -webkit-linear-gradient(top, #d1d1d1 0%, #ECECEC 100%);
+    }
+  }
+  a.button:nth-child(1) {
+    border-top: 1px rgba(0, 0, 0, .2) solid;
+  }
+
+  .new-message {
+    padding: 10px;
+    background-color: #eeeeee;
+
+    input {
+      width: 100%;
+      flex: 1;
+      padding: 10px;
+      outline: none;
+      border: none;
+      font-size: 18px;
+      background-color: white;
+      &:focus, &:hover {
+        outline: none;
+      }
+    }
+  }
+  .send {
+    width: 40px;
+    border-radius: 50%;
+    background: #00897b;;
+    cursor: pointer;
+    position: relative;
+    margin-left: 10px;
+
+    &:before {
+      content: '';
+      background: url('/send.png') no-repeat center center;
+      background-size: 24px 24px;
+      position: absolute;
+      top: -1px;
+      left: 1px;
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  .center-input {
+    display: flex;
+    justify-content: center;
+    margin: 5px 0;
+
+    .send {
+      bottom: 9px;
+    }
+  }
+
+  .message-container {
+    padding: 10vh 0.8rem 8rem 0.8rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    max-height: 100%;
+  }
+
+  .gif-collection {
+    width: 600px;
+
+    @media (max-width: 650px) {
+    width: 100vw;
+    }
+
+    .multiple-items {
+      img {
+        display: block;
+        background: url('/loader.svg') no-repeat center center;
+      }
+    }
+
+  }
+
+  .messages {
+    height: calc(100vh - 4rem - 8rem);
+    overflow-y: auto;
+
+  }
+
+  .arrow-btn {
+    background: transparent;
+    border: none;
+  }
+
+  .arrow-wrapper {
+    width: 60px;
+    height: 40px;
+    margin: 5px;
+  }
+
+  #gif-content {
+    display: flex;
+  }
+
+  .message_image {
+    display: block;
+    // border-radius: 15px 15px 0 0;
+    max-width: 610px;
+    width: 100%;
+  }
+
+  .gif {
+    height: 120px;
+
+    //  background: url('/gif.gif);
+  }
+
+  .slick-slide {
+  }
+
+}
+
+.user-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center; //cross axis alignment here column/vertical, opposite: justify content
+  cursor: pointer;
+  margin-bottom: 0.25em;
+}
+
+.slick-prev:before, .slick-next:before {
+  color: red !important;
+
+}
+
+
+
+.sidebar {
+  border-right: 1px solid #e8e8e8;
+  height: calc(100vh - 4rem);
+  overflow-y: auto;
+  width: 320px;
+  background: #fff;
+  margin-top: 4rem;
+  color: #424242;
+
+  @media (max-width: 760px) {
+    display: none;
+  }
+
+
+  .chat-list {
+    padding: 5px;
+
+    img {
+      border-radius: 50%;
+      padding: 13px 25px;
+    }
+
+    .chat-list-entry {
+      display: block;
+      padding: 5px;
+      cursor: pointer;
+      border-right: 5px solid transparent;
+      &.selected, &:hover {
+
+        border-right-color: #fd5068;
+        background: #fff;
+        -webkit-box-shadow: 0 0 15px 0 hsla(0, 0%, 51%, .22);
+        box-shadow: 0 0 15px 0 hsla(0, 0%, 51%, .22);
+
+      }
+    }
+
+    .menu-item {
+      border-bottom: 1px solid #e8e8e8;
+      border-top: 1px solid #e8e8e8;
+      background-color: #fff;
+      min-height: 50px;
+      display: flex;
+      flex-wrap: wrap;
+      cursor: pointer;
+
+      button {
+        width: 100%;
+        font-size: 1.4rem;
+        background-color: transparent;
+        border-style: none;
+        color: inherit;
+        cursor: pointer;
+      }
+
+    }
+
+  }
+
+  .btn {
+    border: 2px solid transparent;
+    transition: none;
+    padding: .5rem 0.5rem;
+    border-radius: .375rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    background-color: #4ca6ff;
+  }
+
+  .fa-search {
+    color: white;
+  }
+
+  .input-group-search {
+    display: flex;
+    margin-top: 1em;
+    margin-bottom: 1em;
+
+    .input-group-btn {
+      align-items: stretch;
+      font-size: 0;
+      white-space: nowrap;
+    }
+
+    input {
+      border: 1px solid #dadfe6;
+      width: 100%;
+      outline: none;
+      transition: width .2s ease;
+    }
+
+    .form-control-search {
+      padding: 0.25rem 1rem;
+      color: #424242;
+      background-color: #fff;
+      border-radius: .375rem;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  h5 {
+    text-transform: uppercase;
+    font-size: 12px;
+    color: darken($blue, 20%);
+    margin: 0;
+  }
+
+  a {
+    display: block;
+    padding: 5px 10px 5px 20px;
+    border-radius: 0 3px 3px 0;
+    color: #424242;
+    text-decoration: none;
+    border-left: none;
+  }
+
+  a:hover {
+    background: darken($blue, 10%);
+  }
+
+  .active a,
+  .active a:hover {
+    background: #fff;
+    color: $blue;
+    border-left: none;
+
+    .unread {
+      background: $blue;
+      color: #fff;
+    }
+  }
+
+  a .unread {
+    position: relative;
+    top: 2px;
+    float: right;
+    background: #fff;
+    color: $blue;
+    font-size: 11px;
+    font-weight: bold;
+    width: 25px;
+    text-align: center;
+    padding: 1px 0 2px;
+    border-radius: 30px;
+  }
+}

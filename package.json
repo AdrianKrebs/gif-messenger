@@ -1,0 +1,25 @@
+{
+  "name": "gifenger",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "start": "meteor --settings settings.json"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.18.0",
+    "bcrypt": "^0.8.7",
+    "bootstrap": "^4.0.0",
+    "dotenv": "^2.0.0",
+    "fiber": "^1.0.4",
+    "jquery": "^3.3.1",
+    "lodash": "^4.17.4",
+    "meteor-node-stubs": "^0.2.4",
+    "meteor-rxjs": "^0.4.5",
+    "moment": "^2.17.0",
+    "roboto-fontface": "^0.9.0",
+    "rxjs": "^5.0.0-rc.4",
+    "slick-carousel": "^1.8.1",
+    "typeface-exo": "0.0.54"
+  }
+}
