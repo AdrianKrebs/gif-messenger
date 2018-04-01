@@ -210,7 +210,7 @@ Template.chat.events({
         FlowRouter.go('/login');
         $('.back').hide();
     },
-    'submit .new-message-form, keyup .search-input'(event) {
+    'keyup .search-input'(event) {
         event.preventDefault();
         const text = $("#messageBox").val();
         currentText = text;
@@ -220,6 +220,10 @@ Template.chat.events({
 });
 
 const _getGifsFromTenor = _.debounce((text) => {
+
+    if (!$('.skills_section').hasClass('slick-initialized')) {
+       carouselInit();
+    }
 
     Meteor.call('messages.getGifsFromTenor', text, function (error, result) {
         next = result.data.next;
