@@ -173,14 +173,14 @@ Template.chat.events({
 
             const counterpartObj = {
                 userId: counterpartId,
-                imgUrl: counterpart.services.twitter.profile_image_url,
+                imgUrl: convertImgUrlToHttps(counterpart.services.twitter.profile_image_url),
                 name: counterpart.profile.name
             };
             const owner = Meteor.users.findOne({_id: ownerId});
 
             const ownerObj = {
                 userId: ownerId,
-                imgUrl: owner.services.twitter.profile_image_url,
+                imgUrl: convertImgUrlToHttps(owner.services.twitter.profile_image_url),
                 name: owner.profile.name
             };
             Meteor.call('chats.insert', ownerObj, counterpartObj, function (error, result) {
@@ -244,3 +244,8 @@ const _getGifsFromTenor = _.debounce((text) => {
         }
     });
 }, 400);
+
+const convertImgUrlToHttps = (url) => {
+    let splitted = url.split('://');
+    return 'https://' + splitted[1];
+};
