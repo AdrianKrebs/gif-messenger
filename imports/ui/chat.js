@@ -133,6 +133,9 @@ Template.chat.helpers({
     isInConversation() {
         let msgs = getMessages();
         return !isUserNew() && msgs;
+    },
+    convertImgUrlToHttps(url) {
+        return convertImgUrlToHttps(url);
     }
 });
 

@@ -16,7 +16,7 @@
                 {{/if}}
                 {{#each searchResults}}
                 <div class="user-item" data-user-id="{{_id }}">
-                    <img src="{{services.twitter.profile_image_url}}" data-user-id="{{_id }}">
+                    <img src="{{convertImgUrlToHttps services.twitter.profile_image_url}}" data-user-id="{{_id }}">
                     {{profile.name}}
                 </div>
                 {{/each}}
@@ -86,12 +86,4 @@
 
 <template name="sidebar">
 
-</template>
-
-
-<template name="foundUsers">
-    <div class="user" data-user-id="{{_id }}">
-        <img src="{{services.twitter.profile_image_url}}">
-        {{profile.name}}
-    </div>
 </template>
