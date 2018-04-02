@@ -63,7 +63,7 @@ chatRoutes.route('/:chatId', {
         BlazeLayout.render("mainlayout", {main: "chat"});
     }
 });
-chatRoutes.route('/:chatId/chat', {
+chatRoutes.route('/:chatId/:channel', {
     action: function () {
         BlazeLayout.render("mainlayout", {main: "chat"});
     }

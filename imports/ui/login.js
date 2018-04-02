@@ -27,9 +27,9 @@ Template.login.events({
                 let chat = Chats.findOne({'$or': [{'counterpart.userId': Meteor.userId()}, {userId: Meteor.userId()}]}, {sort: {createdAt: -1}});
                 if (chat) {
                     if (Meteor.userId() === chat.counterpart.userId) {
-                        FlowRouter.go('/messages/' + chat.owner.userId);
+                        FlowRouter.go('/chat/'+chat._id+ '/' + chat.owner.userId);
                     } else {
-                        FlowRouter.go('/messages/' + chat.counterpart.userId);
+                        FlowRouter.go('/chat/'+chat._id+ '/' + chat.counterpart.userId);
                     }
                 } else {
                     FlowRouter.go('/chat');

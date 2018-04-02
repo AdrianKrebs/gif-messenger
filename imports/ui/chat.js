@@ -95,9 +95,6 @@ Template.chat.onRendered(function () {
     });
 });
 Template.chat.helpers({
-    username() {
-        return FlowRouter.getParam('channel');
-    },
     messages() {
         return getMessages();
     },
@@ -108,6 +105,7 @@ Template.chat.helpers({
         };
     },
     chats() {
+        //TODO problem is here, you'll find EVERY chat with you as an initiator OR your as a counterpart
         let chats = Chats.find({'$or': [{'counterpart.userId': Meteor.userId()}, {userId: Meteor.userId()}]}, {sort: {createdAt: -1}});
 
         return chats;
@@ -158,9 +156,14 @@ Template.chat.events({
     'click .user-item'(event) {
         let counterpartId = event.target.getAttribute("data-user-id");
         let ownerId = Meteor.userId();
-        let chat = Chats.findOne({'$or': [{'counterpart.userId': Meteor.userId()}, {userId: Meteor.userId()}]}, {sort: {createdAt: -1}});
+        let chat = Chats.findOne({
+            '$or': [{
+                '$and': [{'counterpart.userId': Meteor.userId()},
+                    {'userId': counterpartId}]
+            }, {'$and': [{'counterpart.userId': counterpartId}, {'userId': Meteor.userId()}]}]
+        }, {sort: {createdAt: -1}});
         if (chat) {
-            FlowRouter.go('/messages/' + counterpartId);
+            FlowRouter.go('/chat/' + chat._id + '/' + counterpartId);
             $('.chat-window').show();
             if (window.matchMedia('(max-width: 760px)').matches) {
                 $('.back').show();
@@ -182,10 +185,10 @@ Template.chat.events({
                 name: owner.profile.name
             };
             Meteor.call('chats.insert', ownerObj, counterpartObj, function (error, result) {
-
-
+                const chatId = result;
+                FlowRouter.go('/chat/' + chatId + '/' + counterpartId);
             });
-            FlowRouter.go('/messages/' + counterpartId);
+
             $('.chat-window').show();
             $('.back').show();
         }
@@ -224,7 +227,7 @@ Template.chat.events({
 const _getGifsFromTenor = _.debounce((text) => {
 
     if (!$('.multiple-items').hasClass('slick-initialized')) {
-       carouselInit();
+        carouselInit();
     }
 
     Meteor.call('messages.getGifsFromTenor', text, function (error, result) {

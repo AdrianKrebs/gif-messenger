@@ -6,7 +6,7 @@ import './header.html';
 Template.header.helpers({});
 
 Template.header.onRendered(function () {
-    if (!Meteor.userId()) {
+    if (!Meteor.user()) {
         $('.back').hide();
     }
 });
