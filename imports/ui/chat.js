@@ -33,8 +33,8 @@ const carouselInit = () => {
 };
 
 const destroyCarousel = () => {
-    if ($('.skills_section').hasClass('slick-initialized')) {
-        $('.skills_section').slick('destroy');
+    if ($('.multiple-items').hasClass('slick-initialized')) {
+        $('.multiple-items').slick('destroy');
     }
 };
 
@@ -211,7 +211,6 @@ Template.chat.events({
         $('.back').hide();
     },
     'keyup .search-input'(event) {
-        event.preventDefault();
         const text = $("#messageBox").val();
         currentText = text;
         //TODO desktop tinygif, mobile nanogif as preview
@@ -221,7 +220,7 @@ Template.chat.events({
 
 const _getGifsFromTenor = _.debounce((text) => {
 
-    if (!$('.skills_section').hasClass('slick-initialized')) {
+    if (!$('.multiple-items').hasClass('slick-initialized')) {
        carouselInit();
     }
 
