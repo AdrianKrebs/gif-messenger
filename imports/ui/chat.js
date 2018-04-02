@@ -105,7 +105,6 @@ Template.chat.helpers({
         };
     },
     chats() {
-        //TODO problem is here, you'll find EVERY chat with you as an initiator OR your as a counterpart
         let chats = Chats.find({'$or': [{'counterpart.userId': Meteor.userId()}, {userId: Meteor.userId()}]}, {sort: {createdAt: -1}});
 
         return chats;
