@@ -212,6 +212,9 @@ Template.chat.events({
     },
     'keyup .search-input'(event) {
         const text = $("#messageBox").val();
+        if (event.keyCode === 13) {
+            $("#messageBox").trigger("blur");
+        }
         currentText = text;
         //TODO desktop tinygif, mobile nanogif as preview
         _getGifsFromTenor(text);
