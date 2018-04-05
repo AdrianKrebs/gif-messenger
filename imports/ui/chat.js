@@ -25,10 +25,12 @@ const carouselInit = () => {
     $('.multiple-items').slick({
         infinite: false,
         lazyLoad: 'ondemand',
-        slidesToShow: 3,
-        slidesToScroll: 3,
+        slidesToShow: 2,
+        slidesToScroll: 2,
         arrows: true,
-        variableWidth: true
+        variableWidth: true,
+        mobileFirst: true,
+        swipeToSlide: true,
     });
 };
 

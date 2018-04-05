@@ -183,6 +183,10 @@
   .gif {
     height: 120px;
 
+    @media (max-width: 760px) {
+      max-height: 100px;
+      width: 85%;
+  }
     //  background: url('/gif.gif);
   }
 
@@ -226,6 +230,7 @@
     img {
       border-radius: 50%;
       margin-right: 13px;
+      margin-left: 7px;
     }
 
     .chat-list-entry {
