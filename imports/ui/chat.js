@@ -21,12 +21,26 @@ const scrollBottom = function () {
     }, 400);
 };
 
-const carouselInit = () => {
+const searchUser = () => {
+    const username = $('#search-input').val();
+    //TODO search by nickname
+    let regex = new RegExp('.*' + username + '.*','i'); //ignore case
+    const matchingUsers = Meteor.users.find({'profile.name': regex}).fetch(); // search like
+    const filteredUsers = matchingUsers.filter(u => u._id !== Meteor.userId());
+    if (filteredUsers.length === 0) {
+        Template.instance().noResultsFound.set(true);
+    } else {
+        Template.instance().noResultsFound.set(false);
+    }
+    Template.instance().searchResults.set('searchResults', filteredUsers);
+};
+
+const initCarousel = () => {
     $('.multiple-items').slick({
         infinite: false,
         lazyLoad: 'ondemand',
         slidesToShow: 3,
-        slidesToScroll: 2,
+        slidesToScroll: 3,
         arrows: true,
         variableWidth: true,
         mobileFirst: true,
@@ -86,7 +100,7 @@ Template.chat.onRendered(function () {
     });
 
     destroyCarousel();
-    carouselInit();
+    initCarousel();
     Meteor.call('messages.getGifsFromTenor', 'hi', function (error, result) {
         var imgs = result.data.results.map(i => {
             return {imageUrl: i.media[0].tinygif.url, origin: i.media[0].gif.url}
@@ -143,18 +157,13 @@ Template.chat.helpers({
 
 Template.chat.events({
     'click .search-chat-user'(event) {
-        const username = $('#search-input').val();
+      searchUser();
 
-        //TODO search by nickname
-        let regex = new RegExp('.*' + username + '.*');
-        const matchingUsers = Meteor.users.find({'profile.name': regex}).fetch(); // search like
-        const filteredUsers = matchingUsers.filter(u => u._id !== Meteor.userId());
-        if (filteredUsers.length === 0) {
-            Template.instance().noResultsFound.set(true);
-        } else {
-            Template.instance().noResultsFound.set(false);
+    },
+    'keyup .form-control-search'(event) {
+        if (event.keyCode === 13) {
+           searchUser();
         }
-        Template.instance().searchResults.set('searchResults', filteredUsers);
 
     },
     'click .user-item'(event) {
@@ -192,7 +201,7 @@ Template.chat.events({
                 const chatId = result;
                 FlowRouter.go('/chat/' + chatId + '/' + counterpartId);
             });
-
+            initCarousel();
             $('.chat-window').show();
             $('.back').show();
         }
@@ -223,7 +232,6 @@ Template.chat.events({
             $("#messageBox").trigger("blur");
         }
         currentText = text;
-        //TODO desktop tinygif, mobile nanogif as preview
         _getGifsFromTenor(text);
     }
 });
@@ -231,7 +239,7 @@ Template.chat.events({
 const _getGifsFromTenor = _.debounce((text) => {
 
     if (!$('.multiple-items').hasClass('slick-initialized')) {
-        carouselInit();
+        initCarousel();
     }
 
     Meteor.call('messages.getGifsFromTenor', text, function (error, result) {
