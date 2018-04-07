@@ -25,7 +25,7 @@ const carouselInit = () => {
     $('.multiple-items').slick({
         infinite: false,
         lazyLoad: 'ondemand',
-        slidesToShow: 2,
+        slidesToShow: 3,
         slidesToScroll: 2,
         arrows: true,
         variableWidth: true,

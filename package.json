@@ -12,7 +12,6 @@
     "bootstrap": "^4.0.0",
     "dotenv": "^2.0.0",
     "fiber": "^1.0.4",
-    "jquery": "^3.3.1",
     "lodash": "^4.17.4",
     "meteor-node-stubs": "^0.2.4",
     "meteor-rxjs": "^0.4.5",
